@@ -33,6 +33,34 @@
           key: 'color',
           value: 'Primary',
         },
+        {
+          type: 'CUSTOM',
+          label: 'Alignment',
+          key: 'alignment',
+          value: 'inherit',
+          configuration: {
+            as: 'BUTTONGROUP',
+            dataType: 'string',
+            allowedInput: [
+              {
+                name: 'None',
+                value: 'inherit',
+              },
+              {
+                name: 'Left',
+                value: 'left',
+              },
+              {
+                name: 'Center',
+                value: 'center',
+              },
+              {
+                name: 'Right',
+                value: 'right',
+              },
+            ],
+          },
+        },
       ],
       descendants: [],
     },

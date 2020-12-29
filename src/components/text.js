@@ -35,6 +35,7 @@
           }
           return style.getFontColor(font);
         },
+        textAlign: ({ options: { alignment } }) => alignment,
         fontSize: ({ options: { font } }) => style.getFontSize(font),
         fontFamily: ({ options: { font } }) => style.getFontFamily(font),
         fontWeight: ({ options: { font } }) => style.getFontWeight(font),
