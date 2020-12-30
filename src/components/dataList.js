@@ -1,29 +1,25 @@
 (() => ({
-  name: 'list',
+  name: 'dataList',
   type: 'CONTENT_COMPONENT',
-  allowedTypes: [],
+  allowedTypes: ['BODY_COMPONENT', 'CONTAINER_COMPONENT', 'CONTENT_COMPONENT'],
   orientation: 'HORIZONTAL',
   jsx: (() => {
-    const { env, GetAll, getProperty } = B;
-    const { modelId, filter, property, limit } = options;
+    const { env, GetAll, ModelProvider } = B;
+    const { modelId, filter, limit } = options;
     const isDev = env === 'dev';
 
     function devCanvas() {
-      const items = Array.from(Array(limit).keys());
       return (
         <div>
           <p>There are {limit} records.</p>
-          <ul>
-            {items.map(item => (
-              <li key={item}>{`Item ${item}`}</li>
-            ))}
-          </ul>
+          <div>
+            <div>{children}</div>
+          </div>
         </div>
       );
     }
 
     function prodCanvas() {
-      const { name: propertyName } = getProperty(property);
       return (
         <div className={classes.root}>
           <GetAll modelId={modelId} filter={filter} skip={0} take={limit}>
@@ -41,11 +37,13 @@
               return (
                 <>
                   <p>There are {totalCount} records.</p>
-                  <ul>
+                  <div>
                     {results.map(row => (
-                      <li key={row.id}>{row[propertyName]}</li>
+                      <ModelProvider key={row.id} value={row} id={modelId}>
+                        {children}
+                      </ModelProvider>
                     ))}
-                  </ul>
+                  </div>
                 </>
               );
             }}
